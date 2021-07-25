@@ -181,6 +181,10 @@ public class BasePage {
         return driver.getCurrentUrl();
     }
 
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
     public boolean verifyElement(String xpath) {
         boolean result = false;
         try {
