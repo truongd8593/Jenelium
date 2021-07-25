@@ -5,7 +5,7 @@ Automation framework for UI using Java and Selenium.
 - Install Oracle Java 8.
 - Install IntelliJ IDEA 2020 (Maven integrated in IntelliJ IDEA by default).
 - Using Git integration of IntelliJ IDEA to clone this repository as Maven project.
-- Configure Maven inside IntelliJ.
+- Configure Maven: ![Maven](https://github.com/truongd8593/Jenelium/blob/master/MavenConfigurationIntelliJ.PNG)
 - Click Run button in IntelliJ GUI. It will execute this command:
 ```
 mvn clean install
