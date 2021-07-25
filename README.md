@@ -10,5 +10,5 @@ Automation framework for UI using Java and Selenium.
 ```
 mvn clean install
 ```
-and run all available test cases in src/test/java
+and run all available test cases in ```src/test/java```
 
