@@ -47,12 +47,13 @@ public class TestRegisterPage {
                 .inputEmail("user@gmail.com")
                 .inputHeardAbout("Facebook")
                 .acceptTermAndConditions()
+                .waitSomeSeconds(3)
                 .captureScreenshot(driver, "ScreenShot.png");
+        softAssertion.assertAll();
     }
 
     @After
     public void tearDown() {
-        softAssertion.assertAll();
         driver.quit();
     }
 }

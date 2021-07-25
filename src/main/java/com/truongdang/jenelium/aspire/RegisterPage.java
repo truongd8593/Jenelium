@@ -2,10 +2,8 @@ package com.truongdang.jenelium.aspire;
 
 import com.truongdang.jenelium.core.BasePage;
 import com.truongdang.jenelium.core.Constants;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.FindBy;
 
 /**
  * @author Truong Dang.
@@ -16,29 +14,10 @@ public class RegisterPage extends BasePage {
         super(driver);
     }
 
-    @FindAll({
-            @FindBy(xpath = "//input[@data-cy='register-person-name']"),
-            @FindBy(xpath = "//input[@name='full_name']")
-    })
-    private WebElement nameInput;
-
-    @FindAll({
-            @FindBy(xpath = "//input[@data-cy='register-person-email']"),
-            @FindBy(xpath = "//input[@name='email']")
-    })
-    private WebElement emailInput;
-
-    @FindAll({
-            @FindBy(xpath = "//input[@data-cy='register-person-phone']"),
-            @FindBy(xpath = "//input[@name='phone']")
-    })
-    private WebElement phoneInput;
-
-    @FindAll({
-            @FindBy(xpath = "//input[@data-cy='register-person-heard-about']"),
-            @FindBy(xpath = "//input[@type='search']")
-    })
-    private WebElement heardAboutInput;
+    private By nameInput = By.xpath("//input[@data-cy='register-person-name']");
+    private By emailInput = By.xpath("//input[@data-cy='register-person-email']");
+    private By phoneInput = By.xpath("//input[@data-cy='register-person-phone']");
+    private By heardAboutInput = By.xpath("//input[@data-cy='register-person-heard-about']");
 
     public RegisterPage inputName(String text) {
         this.sendKeysToElement(nameInput, text);

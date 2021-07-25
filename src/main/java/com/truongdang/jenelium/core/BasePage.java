@@ -155,6 +155,13 @@ public class BasePage {
         return this;
     }
 
+    public BasePage sendKeysToElementByJs(By locator, String keys) {
+        WebElement inputField = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].setAttribute('value', arguments[1])", inputField, keys);
+        return this;
+    }
+
     public BasePage sendKeysToElementToEdit(String xpath, String keys) {
         WebElement elm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
         act.moveToElement(elm).build().perform();
