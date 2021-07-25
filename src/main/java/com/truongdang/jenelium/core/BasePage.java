@@ -24,7 +24,19 @@ public class BasePage {
 
     protected By popup = By.xpath("//*[@id='toast-container']/descendant::span");
 
-    private By pageText(String text) {
+    protected By checkboxBeforeText(String text) {
+        return By.xpath(String.format("//div[contains(text(), '%s')]/preceding-sibling::div", text));
+    }
+
+    protected By button(String name) {
+        return By.xpath(String.format("//span[descendant-or-self::*[contains(text(), '%s')]]", name));
+    }
+
+    protected By hyperText(String text) {
+        return By.xpath(String.format("//a[contains(text(), '%s')]", text));
+    }
+
+    protected By pageText(String text) {
         return By.xpath(String.format("//div[contains(text(), '%s')]", text));
     }
 
@@ -42,6 +54,11 @@ public class BasePage {
 
     public BasePage waitForPopUp() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(popup));
+        return this;
+    }
+
+    public BasePage waitUntilPageContainsHyperText(String text, int seconds) {
+        waitUntilPageContainsElement(hyperText(text), seconds);
         return this;
     }
 
@@ -64,6 +81,16 @@ public class BasePage {
         WebElement elm = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
         act.moveToElement(elm).build().perform();
         elm.click();
+        return this;
+    }
+
+    public BasePage clickOnHyperText(String text) {
+        clickOnElement(hyperText(text));
+        return this;
+    }
+
+    public BasePage clickOnCheckboxBeforeText(String text) {
+        clickOnElement(checkboxBeforeText(text));
         return this;
     }
 
@@ -202,5 +229,16 @@ public class BasePage {
             System.out.println("Warning: Some Other exception");
         }
         return this;
+    }
+
+    public boolean isButtonEnabled(String buttonName) {
+        try {
+            waitUntilPageContainsElement(button(buttonName), Constants.DEFAULT_WAIT_TIME_IN_SECONDS);
+            return driver.findElement(button(buttonName)).isEnabled();
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 }
