@@ -12,3 +12,6 @@ mvn clean install
 ```
 and run all available test cases in ```src/test/java```
 
+# Some screenshots:
+![Sc1](https://github.com/truongd8593/Jenelium/blob/master/ScreenShot.png)
+
