@@ -141,6 +141,20 @@ public class BasePage {
         return this;
     }
 
+    public BasePage sendKeysToElement(WebElement element, String keys) {
+        WebElement elm = wait.until(ExpectedConditions.elementToBeClickable(element));
+        act.moveToElement(elm).build().perform();
+        elm.sendKeys(keys);
+        return this;
+    }
+
+    public BasePage sendKeysToElementByJs(WebElement element, String keys) {
+        WebElement inputField = wait.until(ExpectedConditions.elementToBeClickable(element));
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].setAttribute('value', arguments[1])", inputField, keys);
+        return this;
+    }
+
     public BasePage sendKeysToElementToEdit(String xpath, String keys) {
         WebElement elm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
         act.moveToElement(elm).build().perform();
@@ -163,8 +177,12 @@ public class BasePage {
         return elm.getText();
     }
 
-    public Boolean verifyElement(String xpath) {
-        Boolean result = false;
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+
+    public boolean verifyElement(String xpath) {
+        boolean result = false;
         try {
             WebElement elm = driver.findElement(By.xpath(xpath));
             act.moveToElement(elm).build().perform();
@@ -176,8 +194,8 @@ public class BasePage {
         return result;
     }
 
-    public Boolean verifyWebTitle(String expectedTitle){
-        Boolean result = false;
+    public boolean verifyWebTitle(String expectedTitle){
+        boolean result = false;
         try{
             String actualTitle = driver.getTitle();
             if (actualTitle.equalsIgnoreCase(expectedTitle))
