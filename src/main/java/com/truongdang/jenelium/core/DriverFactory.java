@@ -1,7 +1,8 @@
 package com.truongdang.jenelium.core;
 
 /**
- * Created by Truong Dang on 7/24/2021
+ * @author Truong Dang.
+ * Created on Jul, 2021.
  */
 
 import io.github.bonigarcia.wdm.WebDriverManager;
