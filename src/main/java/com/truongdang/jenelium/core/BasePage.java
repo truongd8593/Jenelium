@@ -102,7 +102,7 @@ public class BasePage {
     }
 
     public BasePage clickOnElement(By locator) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
         return this;
     }
 

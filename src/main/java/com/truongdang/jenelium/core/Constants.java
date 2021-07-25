@@ -10,6 +10,8 @@ public class Constants {
     public static final String ASPIRE_HOME_PAGE = "https://feature-qa-automation.customer-frontend.staging.aspireapp.com/sg/";
     public static final String TERM_AND_CONDITIONS_TEXT = "I have read and agree with the";
     public static final String LOGIN_TEXT = "Login to Aspire";
-    public static final String LOGIN_PAGE_TITLE = "Login to Aspire | Aspire";
     public static final String REGISTER = "Register";
+
+    public static final String LOGIN_PAGE_TITLE = "Login to Aspire | Aspire";
+    public static final String REGISTER_PAGE_TITLE = "Let's get started | Aspire";
 }

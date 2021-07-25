@@ -30,11 +30,11 @@ public class TestHomePage {
     public void testVisitHomePage() {
         page.visitAspireHomePage();
         softAssertion.assertThat(page.getPageTitle()).isEqualTo(Constants.LOGIN_PAGE_TITLE);
+        softAssertion.assertAll();
     }
 
     @After
     public void tearDown() {
-        softAssertion.assertAll();
         driver.quit();
     }
 }

@@ -43,7 +43,7 @@ public class DriverFactory {
 
     private static List<String> getDefaultCapabilities() {
         List<String> capability = new ArrayList<>();
-        capability.add("--headless");
+//        capability.add("--headless");
         capability.add("--disable-gpu");
         capability.add("--start-maximized");
         capability.add("--window-size=1920,1080");
