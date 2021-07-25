@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,9 +20,13 @@ public class BasePage {
     WebDriverWait wait;
     Actions act;
 
-    protected By spin = By.xpath("//div[@id='system-loader']");
+    protected By spinner = By.xpath("//div[contains(@class, 'inner-loading')]");
 
     protected By popup = By.xpath("//*[@id='toast-container']/descendant::span");
+
+    private By pageText(String text) {
+        return By.xpath(String.format("//div[contains(text(), '%s')]", text));
+    }
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -29,8 +34,9 @@ public class BasePage {
         this.act = new Actions(driver);
     }
 
-    public BasePage waitForLoading() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(spin));
+    public BasePage waitForPageLoading() {
+        List<WebElement> spinners = driver.findElements(spinner);
+        wait.until(ExpectedConditions.invisibilityOfAllElements(spinners));
         return this;
     }
 
@@ -39,8 +45,18 @@ public class BasePage {
         return this;
     }
 
-    public BasePage waitUntilPageContainsElement(String xpath, int seconds) {
-        wait.withTimeout(Duration.ofSeconds(seconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+    public BasePage waitUntilPageContainsText(String text, int seconds) {
+        waitUntilPageContainsElement(pageText(text), seconds);
+        return this;
+    }
+
+    public BasePage waitUntilPageContainsElement(By locator, int seconds) {
+        wait.withTimeout(Duration.ofSeconds(seconds)).until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return this;
+    }
+
+    public BasePage waitUntilPageContainsElement(WebElement element, int seconds) {
+        wait.withTimeout(Duration.ofSeconds(seconds)).until(ExpectedConditions.visibilityOf(element));
         return this;
     }
 
@@ -90,8 +106,24 @@ public class BasePage {
         elm.sendKeys(keys);
         return this;
     }
+
+    public BasePage sendKeysToElement(By locator, String keys) {
+        WebElement elm = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        act.moveToElement(elm).build().perform();
+        elm.sendKeys(keys);
+        return this;
+    }
+
     public BasePage sendKeysToElementToEdit(String xpath, String keys) {
         WebElement elm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        act.moveToElement(elm).build().perform();
+        elm.clear();
+        elm.sendKeys(keys);
+        return this;
+    }
+
+    public BasePage sendKeysToElementToEdit(By locator, String keys) {
+        WebElement elm = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         act.moveToElement(elm).build().perform();
         elm.clear();
         elm.sendKeys(keys);
