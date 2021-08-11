@@ -1,5 +1,5 @@
 # Jenelium
-Automation framework for UI using Java and Selenium.
+Demonstrate POM approach in programming UI Automation frameworks. Written in Java and Selenium.
 
 # How to run
 - Install Oracle Java 8.
